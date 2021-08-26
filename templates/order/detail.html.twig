@@ -1,0 +1,36 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Order Page{% endblock %}
+
+{% block body %}
+
+<div class="container mt-3">
+    <table class = "table">
+        <thead>
+            <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Book Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Guest Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">{{ order.id}}</td>
+                <td scope="row">
+                {% for a in order.Name %}
+                  <a href="{{ path('book_detail_user', {'id' : a.id }) }}">
+                       {{ a.title }}
+                  </a>
+                  <br>
+                {% endfor %}
+                </td>
+                <td scope="row">{{ order.quantity}}</td>
+                <td scope="row">{{ order.guestname}}</td>              
+                <td scope="row">
+                    <a class="btn btn-danger" href="{{ path ('order_delete_user', {'id': order.id}) }}"onclick="return confirm('This publisher will be deleted!')">Delete</a>
+            </tr>
+        </tbody>
+</div>
+{% endblock %}

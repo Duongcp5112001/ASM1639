@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block title %} Add Order {% endblock %}
+
+{% block body %}
+    <div class="container-fluid mt-3"> 
+        <h2 class="text-center mt-3"> Create Order </h2>
+        <div class="col-md-8"></div>
+            {{ form_start (form) }}
+                <div class="form-group">
+                    <p class="text-info text-bold"> Book Title </p>                    
+                    {{ form_widget (form.Name, {'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group">
+                    <p class="text-info text-bold">Quantity </p>                  
+                    {{ form_widget (form.Quantity, {'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group">
+                    <p class="text-info text-bold">User Name</p>  
+                    {{ form_widget (form.UserName, {'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group">
+                    <p class="text-info text-bold">User Phone</p>  
+                    {{ form_widget (form.UserPhone, {'attr': {'class': 'form-control'} }) }}
+                </div>
+                <div class="form-group text-center mt-3">
+                    <button class="btn btn-danger">Create</button>
+                </div>
+            {{ form_end (form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book List{% endblock %}
+{% block body %}
+<div class="container mt-3">
+    {% for flash in app.flashes("Success") %}
+        <p class="alert alert-primary"> {{ flash }} </p>
+    {% endfor %}
+    {% for flash in app.flashes("Error") %}
+        <p class="alert alert-danger"> {{ flash }} </p>
+    {% endfor %}
+</div>
+<a class="btn btn-primary" href="{{path('book_create')}}">Create</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Book ID</th>
+            <th scope="col">Book Title</th>
+            <th scope="col">Book Image</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+        <tr>
+            <td scope="row">{{book.id}}</td>
+            <td scope="row">{{book.title}}</td>
+            <td scope="row">
+                    <img src="{{asset('images/book/' ~ book.image)}}" width="200px" height="288px"/>
+            </td>
+            <td scope="row">
+                <a class="btn btn-info" href="{{path('book_detail', {'id':book.id})}}">View detail</a>
+                <a class="btn btn-warning" href="{{path('book_update', {'id':book.id})}}">Update</a>
+                <a class="btn btn-danger" href="{{path('book_delete', {'id':book.id})}}"
+                onclick="return confirm('Are you sure to delete ?')"
+                >Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

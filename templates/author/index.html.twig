@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Author List{% endblock %}
+{% block body %}
+<div class="container mt-3">
+    {% for flash in app.flashes("Success") %}
+        <p class="alert alert-primary"> {{ flash }} </p>
+    {% endfor %}
+    {% for flash in app.flashes("Error") %}
+        <p class="alert alert-danger"> {{ flash }} </p>
+    {% endfor %}
+</div>
+<a class="btn btn-primary" href="{{path('author_create')}}">Create</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Author ID</th>
+            <th scope="col">Author Name</th>
+            <th scope="col">Author Image</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for author in authors %}
+        <tr>
+            <td scope="row">{{author.id}}</td>
+            <td scope="row">{{author.name}}</td>
+            <td scope="row" >
+                    <img src="{{asset('images/author/' ~ author.image)}}" width="200px" height="288px" >
+            </td>
+            <td scope="row">
+                <a class="btn btn-info" href="{{path('author_detail', {'id':author.id})}}">View detail</a>
+                <a class="btn btn-warning" href="{{path('author_update', {'id':author.id})}}">Update</a>
+                <a class="btn btn-danger" href="{{path('author_delete', {'id':author.id})}}"
+                    onclick="return confirm('Are you sure to delete ?')"
+                >Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

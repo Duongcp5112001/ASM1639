@@ -1,0 +1,37 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %} Book Detail {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+<a class="btn btn-primary" href="{{ path ('book_list_user') }}">Book List</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Book Title</th>
+            <th scope="col">Book Price</th>
+            <th scope="col">Book Quantity</th>
+            <th scope="col">Book Authors</th> 
+            <th scope="col">Book Image</th> 
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td scope="row">{{ book.title }}</td>
+            <td scope="row">{{ book.price }}</td>
+            <td scope="row">{{ book.quantity }}</td>
+            <td scope="row">
+                {% for a in book.author %}
+                       {{ a.name }}
+                  <br>
+                {% endfor %}
+            </td>
+            <td scope="row">
+                    <img src="{{asset('images/book/' ~ book.image)}}" width="100px" height="120px"/>
+            </td>
+        </tr> 
+    </tbody>
+</table>
+</div>
+{% endblock %}

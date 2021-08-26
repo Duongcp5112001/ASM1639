@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Author Detail Infomation{% endblock %}
+{% block body %}
+<div class="container mt-3">
+    <a class="btn btn-primary" href="{{path('author_list')}}">Author List</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Author ID</th>
+                <th scope="col">Author Name</th>
+                <th scope="col">Author Birthplace</th>
+                <th scope="col">Author Birthdate</th>
+                <th scope="col">Author Image</th>
+                <th scope="col">Published Books</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">{{author.id}}</td>
+                <td scope="row">{{author.name}}</td>
+                <td scope="row">{{author.birthplace}}</td>
+                <td scope="row">{{author.birthday | date("d/m/Y")}}</td>
+                <td scope="row">
+                    {% for book in author.books %}
+                        <a href="{{ path ('book_detail', {'id' : book.id }) }}">
+                              {{ book.title }}
+                        </a>
+                        <br>
+                    {% endfor %}   
+                </td>
+                <td scope="row">
+                    <img src="{{asset('images/author/' ~ author.image)}}" width="100px" height="120px"/>
+                </td>
+                <td scope="row">
+                    <a class="btn btn-warning" href="{{path('author_update', {'id':author.id})}}">Update</a>
+                    <a class="btn btn-warning" href="{{path('author_delete', {'id':author.id})}}"
+                    onclick="return confirm('Are you sure to delete ?')"
+                    >Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

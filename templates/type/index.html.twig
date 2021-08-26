@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Type List{% endblock %}
+{% block body %}
+<div class="container mt-3">
+    {% for flash in app.flashes("Success") %}
+        <p class="alert alert-primary"> {{ flash }} </p>
+    {% endfor %}
+    {% for flash in app.flashes("Error") %}
+        <p class="alert alert-danger"> {{ flash }} </p>
+    {% endfor %}
+</div>
+<a class="btn btn-primary" href="{{path('type_create')}}">Create</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Type ID</th>
+            <th scope="col">Type Name</th>
+            <th scope="col">Type Image</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for type in types %}
+        <tr>
+            <td scope="row">{{type.id}}</td>
+            <td scope="row">{{type.name}}</td>
+            <td scope="row">
+                    <img src="{{asset('images/type/' ~ type.image)}}" width="200px" height="288px"/>
+            </td>
+            <td scope="row">
+                <a class="btn btn-info" href="{{path('type_detail', {'id':type.id})}}">View detail</a>
+                <a class="btn btn-warning" href="{{path('type_update', {'id':type.id})}}">Update</a>
+                <a class="btn btn-danger" href="{{path('type_delete', {'id':type.id})}}"
+                onclick="return confirm('Are you sure to delete ?')"
+                >Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

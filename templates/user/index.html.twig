@@ -1,0 +1,29 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Book List{% endblock %}
+{% block body %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Book ID</th>
+            <th scope="col">Book Title</th>
+            <th scope="col">Book Authors</th> 
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+        <tr>
+            <td scope="row">{{book.id}}</td>
+            <td scope="row">{{book.title}}</td>
+            <td scope="row">
+                    <img src="{{asset('images/book/' ~ book.image)}}" width="100px" height="120px"/>
+            </td>
+            <td scope="row">
+                <a class="btn btn-info" href="{{path('book_detail_user', {'id':book.id})}}">View detail</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
